@@ -20,6 +20,8 @@ function M.setup(user_config)
 	vim.notify(git.get_branch_name())
 	vim.notify(tostring(git.get_number_of_commits_in_branch()))
 	vim.notify(tostring(git.get_number_of_commits_in_repo()))
+	vim.notify(vim.inspect(git.get_contributors()))
+	vim.notify(tostring(git.get_number_of_contributors()))
 end
 
 return M
