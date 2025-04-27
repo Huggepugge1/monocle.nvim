@@ -18,6 +18,7 @@ function M.setup(user_config)
 	local git = require('monocle.git')
 	vim.notify(git.get_project_name())
 	vim.notify(git.get_branch_name())
+	vim.notify(tostring(git.get_number_of_commits_in_branch()))
 end
 
 return M

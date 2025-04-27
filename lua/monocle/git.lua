@@ -35,4 +35,12 @@ function M.get_branch_name()
 	return git_command({ 'branch', '--show-current' })
 end
 
+function M.get_number_of_commits_in_branch()
+	return #vim.split(git_command({ 'log', '--pretty=oneline' }), '\n')
+end
+
+function M.get_number_of_commits_in_repo()
+	return #vim.split(git_command({ 'log', '--pretty=oneline' }), '\n')
+end
+
 return M
