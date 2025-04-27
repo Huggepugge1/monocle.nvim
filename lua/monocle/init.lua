@@ -16,7 +16,8 @@ function M.setup(user_config)
 	M.config = vim.tbl_deep_extend('force', M.config, user_config or {})
 
 	local git = require('monocle.git')
-	vim.notify(git.get_repo_name())
+	vim.notify(git.get_project_name())
+	vim.notify(git.get_branch_name())
 end
 
 return M
