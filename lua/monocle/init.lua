@@ -22,6 +22,7 @@ function M.setup(user_config)
 	vim.notify(tostring(git.get_number_of_commits_in_repo()))
 	vim.notify(vim.inspect(git.get_contributors()))
 	vim.notify(tostring(git.get_number_of_contributors()))
+	vim.notify(vim.inspect(git.get_number_of_changes()))
 end
 
 return M
