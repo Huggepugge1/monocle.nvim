@@ -43,4 +43,24 @@ function M.get_number_of_commits_in_repo()
 	return tonumber(git_command({ 'rev-list', '--all', '--count' }))
 end
 
+function M.get_contributors()
+	return git_command({ 'log', '--all', '--pretty=format:%an' })
+end
+
+local function unique(table)
+	local newtable = {}
+	local hash = {}
+	for _, x in ipairs(table) do
+		if not hash[x] then
+			newtable[#newtable + 1] = x
+			hash[x] = true
+		end
+	end
+	return newtable
+end
+
+function M.get_number_of_contributors()
+	return #unique(vim.split(M.get_contributors(), '\n'))
+end
+
 return M
