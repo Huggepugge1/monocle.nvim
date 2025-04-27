@@ -36,11 +36,11 @@ function M.get_branch_name()
 end
 
 function M.get_number_of_commits_in_branch()
-	return #vim.split(git_command({ 'log', '--pretty=oneline' }), '\n')
+	return tonumber(git_command({ 'rev-list', 'HEAD', '--count' }))
 end
 
 function M.get_number_of_commits_in_repo()
-	return #vim.split(git_command({ 'log', '--pretty=oneline' }), '\n')
+	return tonumber(git_command({ 'rev-list', '--all', '--count' }))
 end
 
 return M
