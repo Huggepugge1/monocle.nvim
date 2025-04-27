@@ -63,4 +63,16 @@ function M.get_number_of_contributors()
 	return #unique(vim.split(M.get_contributors(), '\n'))
 end
 
+function M.get_number_of_changes()
+	local files = vim.split(git_command({ 'diff', '--numstat' }), '\n')
+	local insertions = 0
+	local deletions = 0
+	for _, file in ipairs(files) do
+		local changes = vim.split(file, '\t')
+		insertions = insertions + tonumber(changes[1])
+		deletions = deletions + tonumber(changes[2])
+	end
+	return { insertions = insertions, deletions = deletions }
+end
+
 return M
