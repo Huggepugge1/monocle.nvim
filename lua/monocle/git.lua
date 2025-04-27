@@ -35,4 +35,12 @@ function M.get_branch_name()
 	return git_command({ 'branch', '--show-current' })
 end
 
+function M.get_number_of_commits_in_branch()
+	return tonumber(git_command({ 'rev-list', 'HEAD', '--count' }))
+end
+
+function M.get_number_of_commits_in_repo()
+	return tonumber(git_command({ 'rev-list', '--all', '--count' }))
+end
+
 return M
