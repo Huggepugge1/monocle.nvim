@@ -84,6 +84,7 @@ function M.display_statusline(config)
 			section_separators = { left = ' ', right = ' ' },
 		},
 		sections = sections,
+		inactive_sections = sections,
 	}
 end
 
