@@ -1,10 +1,23 @@
 local M = {}
 
-M.config = {}
+M.config = {
+	statusline = {
+		name = true,
+		branch = true,
+		changes = true,
+		current_time = {
+			enable = true,
+			hours = true,
+			minutes = true,
+			seconds = false,
+		}
+	}
+}
 
 function M.reload()
 	local modules = {
-		'monocle.git',
+		"monocle.git",
+		"monocle.statusline",
 	}
 
 	for _, module in ipairs(modules) do
@@ -13,16 +26,11 @@ function M.reload()
 end
 
 function M.setup(user_config)
-	M.config = vim.tbl_deep_extend('force', M.config, user_config or {})
+	local statusline = require("monocle.statusline")
 
-	local git = require('monocle.git')
-	vim.notify(git.get_project_name())
-	vim.notify(git.get_branch_name())
-	vim.notify(tostring(git.get_number_of_commits_in_branch()))
-	vim.notify(tostring(git.get_number_of_commits_in_repo()))
-	vim.notify(vim.inspect(git.get_contributors()))
-	vim.notify(tostring(git.get_number_of_contributors()))
-	vim.notify(vim.inspect(git.get_number_of_changes()))
+	M.config = vim.tbl_deep_extend("force", M.config, user_config or {})
+
+	statusline.display_statusline(M.config)
 end
 
 return M
