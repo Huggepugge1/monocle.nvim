@@ -5,8 +5,12 @@ M.config = {
 		name = true,
 		branch = true,
 		changes = true,
-		number_of_commits = false,
-		current_time = true,
+		current_time = {
+			enable = true,
+			hours = true,
+			minutes = true,
+			seconds = false,
+		}
 	}
 }
 
