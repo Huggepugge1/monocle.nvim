@@ -1,6 +1,6 @@
 # monocle.nvim
-
-**monocle.nvim** is a Neovim plugin designed to display key project statistics, including Git-related details, directly in the statusline and in a floating dashboard. The plugin integrates seamlessly with Git and provides a clean, organized way to monitor your project’s activity.
+**monocle.nvim** is a Neovim plugin designed to display key project statistics, including Git-related details, directly in the statusline and in a floating dashboard.
+The plugin integrates seamlessly with Git and provides a clean, organized way to monitor your project’s activity.
 
 ## Features
 
