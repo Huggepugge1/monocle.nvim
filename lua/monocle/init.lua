@@ -9,7 +9,7 @@ M.config = {
 			enable = true,
 			hours = true,
 			minutes = true,
-			seconds = true,
+			seconds = false,
 		}
 	}
 }
