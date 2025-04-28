@@ -9,16 +9,19 @@ M.config = {
 			enable = true,
 			hours = true,
 			minutes = true,
-			seconds = false,
+			seconds = true,
 		}
 	}
 }
 
 function M.reload()
 	local modules = {
+		"monocle",
 		"monocle.git",
 		"monocle.statusline",
 		"monocle.dashboard",
+		"monocle.dashboard.commits",
+		"monocle.dashboard.contributors",
 	}
 
 	for _, module in ipairs(modules) do
@@ -27,6 +30,10 @@ function M.reload()
 end
 
 function M.setup(user_config)
+	require('monocle.git').start_polling()
+	vim.loop.new_timer():start(0, 5000, vim.schedule_wrap(function()
+		require("monocle.git").start_polling() -- Re-run polling
+	end))
 	local statusline = require("monocle.statusline")
 	local dashboard = require("monocle.dashboard")
 
