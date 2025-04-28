@@ -4,13 +4,16 @@ M.config = {
 	statusline = {
 		name = true,
 		branch = true,
-		changes = true
+		changes = true,
+		number_of_commits = false,
+		current_time = true,
 	}
 }
 
 function M.reload()
 	local modules = {
 		"monocle.git",
+		"monocle.statusline",
 	}
 
 	for _, module in ipairs(modules) do
@@ -19,31 +22,11 @@ function M.reload()
 end
 
 function M.setup(user_config)
-	local git = require("monocle.git")
+	local statusline = require("monocle.statusline")
 
 	M.config = vim.tbl_deep_extend("force", M.config, user_config or {})
 
-	local statusline = M.config.statusline or {}
-
-	local statusline_sections = {
-		lualine_a = { {} },
-		lualine_b = { {} },
-		lualine_c = { {} },
-	}
-
-	if statusline.name then
-		statusline_sections.lualine_a = { { git.get_project_name } }
-	end
-	if statusline.branch then
-		statusline_sections.lualine_b = { { git.get_branch_name } }
-	end
-	if statusline.changes then
-		statusline_sections.lualine_c = { { git.get_number_of_changes } }
-	end
-
-	require("lualine").setup {
-		sections = statusline_sections
-	}
+	statusline.display_statusline(M.config)
 end
 
 return M

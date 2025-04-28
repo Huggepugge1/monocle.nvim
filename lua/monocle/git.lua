@@ -69,8 +69,8 @@ function M.get_number_of_changes()
 	local deletions = 0
 	for _, file in ipairs(files) do
 		local changes = vim.split(file, '\t')
-		insertions = insertions + tonumber(changes[1])
-		deletions = deletions + tonumber(changes[2])
+		insertions = insertions + (tonumber(changes[1]) or 0)
+		deletions = deletions + (tonumber(changes[2]) or 0)
 	end
 	return { insertions = insertions, deletions = deletions }
 end
