@@ -1,7 +1,6 @@
 local M = {}
 local git = require("monocle.git")
 
-
 local function display_repo_name(config, sections)
 	if config.name then
 		sections.lualine_a = { { git.get_project_name } }
