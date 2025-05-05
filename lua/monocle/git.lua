@@ -10,7 +10,7 @@ local cache = {
 
 local function run_command_async(command, callback)
 	vim.system(command, { text = true }, function(obj)
-		if obj.code == 0 and obj.stdout and vim.trim(obj.stdout) ~= '' then
+		if obj.code == 0 then
 			pcall(callback, vim.trim(obj.stdout))
 		end
 	end)
@@ -60,6 +60,11 @@ function M.start_polling()
 	end)
 
 	git_command_async({ "diff", "--numstat" }, function(output)
+		if #output == 0 then
+			cache.changes = { insertions = 0, deletions = 0 }
+			return
+		end
+
 		local insertions, deletions = 0, 0
 		for _, line in ipairs(vim.split(output, '\n')) do
 			local fields = vim.split(line, '\t')

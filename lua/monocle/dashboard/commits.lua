@@ -8,7 +8,7 @@ function M.commit_stats()
 	}
 	local lines = {
 		'Commits In Current Branch: ' .. git.get_number_of_commits_in_branch(),
-		'Total Number Of Commits: ' .. git.get_number_of_commits_in_branch(),
+		'Total Number Of Commits: ' .. git.get_number_of_commits_in_repo(),
 	}
 
 	return {
